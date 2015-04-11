@@ -5,6 +5,7 @@ class Game < Gosu::Window
     @background = Background.new(self)
     @player = Player.new(self)
     @controller = Controller.new(self, @player)
+    @missiles = Missiles.new(self)
     @updatables = [@background, @controller, @player]
   end
 
