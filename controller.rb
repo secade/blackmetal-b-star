@@ -6,16 +6,16 @@ class Controller
 
   def update
     if @game.button_down? Gosu::KbLeft
-      @player.move_left
+      @player.impulse(:left)
     end
     if @game.button_down? Gosu::KbRight
-      @player.move_right
+      @player.impulse(:right)
     end
     if @game.button_down? Gosu::KbUp
-      @player.move_up
+      @player.impulse(:up)
     end
     if @game.button_down? Gosu::KbDown
-      @player.move_down
+      @player.impulse(:down)
     end
   end
 
