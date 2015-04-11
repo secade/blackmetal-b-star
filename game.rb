@@ -5,11 +5,11 @@ class Game < Gosu::Window
     @background = Background.new(self)
     @player = Player.new(self)
     @controller = Controller.new(self, @player)
+    @updatables = [@background, @controller, @player]
   end
 
   def update
-    @controller.update
-    @player.update
+    @updatables.each { |u| u.update}
   end
 
   def draw
