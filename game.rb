@@ -18,7 +18,6 @@ class Game < Gosu::Window
   end
 
   def button_down(id)
-    puts id
     @controller.button_down(id)
   end
 end
