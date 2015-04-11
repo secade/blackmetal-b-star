@@ -1,4 +1,6 @@
 class Game < Gosu::Window
+  attr_accessor :missiles
+
   def initialize 
     super 640, 480, false
     self.caption = 'Blackmetal B* Demo'
@@ -6,7 +8,7 @@ class Game < Gosu::Window
     @player = Player.new(self)
     @controller = Controller.new(self, @player)
     @missiles = Missiles.new(self)
-    @updatables = [@background, @controller, @player]
+    @updatables = [@background, @controller, @player, @missiles]
   end
 
   def update
@@ -16,6 +18,7 @@ class Game < Gosu::Window
   def draw
     @background.draw
     @player.draw
+    @missiles.draw
   end
 
   def button_down(id)

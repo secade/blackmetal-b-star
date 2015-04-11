@@ -20,7 +20,10 @@ class Controller
   end
 
   def button_down(id)
-    if id == Gosu::KbEscape
+    case id 
+    when Gosu::KbSpace
+      @game.missiles.create(@player.x, @player.y)
+    when Gosu::KbEscape
       @game.close
     end
   end

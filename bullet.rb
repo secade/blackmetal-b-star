@@ -7,7 +7,7 @@ class Bullet
   end
 
   def update
-    @y += @vel
+    @y -= @vel
   end
 
   def draw

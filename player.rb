@@ -1,4 +1,5 @@
 class Player
+  attr_accessor :x, :y
   def initialize(game)
     @image = Gosu::Image.new(game, "assets/img/squid.png", false)
     @x, @y = (640 - 32) / 2, (480 - 32) / 2
