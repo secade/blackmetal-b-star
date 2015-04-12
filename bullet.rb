@@ -2,6 +2,7 @@ class Bullet
   attr_accessor :x, :y, :width, :height
 
   def initialize(game, x, y)
+    @game = game
     @image = Gosu::Image.load_tiles(game, "assets/img/bullet.png", 6, 13, false)
     @x, @y = x + 13, y
     @width, @height = 12, 26
@@ -19,6 +20,6 @@ class Bullet
 
   def collide
     Missiles.destroy(self)
-    Explosions.create_small(x, y)
+    Explosions.create(@game, x, y)
   end
 end

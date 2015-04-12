@@ -13,7 +13,6 @@ class CollisionEngine
     @enemies.enemies.each do |e|
       Missiles.bullets.each do |b|
         if e.collide?(b)
-          puts 'collide'
           b.collide
           # @missiles.destroy(b)
           # Enemies.destroy(e)

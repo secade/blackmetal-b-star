@@ -14,11 +14,13 @@ class Game < Gosu::Window
 
   def update
     Missiles.update
+    Explosions.update
     @updatables.each { |u| u.update}
   end
 
   def draw
     Missiles.draw
+    Explosions.draw
     @drawables.each { |d| d.draw}
   end
 
