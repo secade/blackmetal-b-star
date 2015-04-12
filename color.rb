@@ -15,6 +15,14 @@ module Color
     0xff000000
   end
 
+  def self.red
+    0xffff0000
+  end
+
+  def self.green
+    0xff00ff00
+  end
+
   def self.null
     0xFFffffff
   end

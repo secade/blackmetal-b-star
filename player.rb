@@ -1,13 +1,14 @@
 class Player
   include Collidable
 
-  attr_accessor :x, :y
+  attr_accessor :x, :y, :health
 
   def initialize(game)
     @image = game.images.player.squid
     @x, @y = 304, 448
     @vx = @vy = 0
     @width, @height = @image.width, @image.height
+    @health = 100
   end
 
   def update

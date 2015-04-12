@@ -35,7 +35,7 @@ module Bullets
   end
 
   def self.clean(bullets)
-    bullets.delete_if { |b| b.x + b.width < 0 || b.x > Game::FIELD_WIDTH || b.y + b.height < 0 || b.y > Game::FIELD_WIDTH }
+    bullets.delete_if { |b| b.x + b.width < 0 || b.x > Game::FIELD_W || b.y + b.height < 0 || b.y > Game::FIELD_W }
   end
 
   def self.bullets

@@ -4,7 +4,8 @@ class StatePlay < StateMachine
     @background = Background.new(@game)
     @player = Player.new(@game)
     @controller = ControllerPlayer.new(@game, @player)
-    @updatables = [@background, @controller, @player]
+    @ui = PlayUI.new(@game, @player)
+    @updatables = [@background, @controller, @player, @ui]
     @drawables = @updatables - [@controller]
   end
 
@@ -15,7 +16,7 @@ class StatePlay < StateMachine
     if rand(100) < 14 && Enemies.enemies.size < 25
       generate_enemy
     end
-    @updatables.each { |u| u.update}
+    @updatables.each { |u| u.update }
     CollisionEngine.check(@player)
   end
 
@@ -23,7 +24,7 @@ class StatePlay < StateMachine
     Bullets.draw
     Enemies.draw
     Explosions.draw
-    @drawables.each { |d| d.draw}
+    @drawables.each { |d| d.draw }
   end
 
   def button_down(id)
