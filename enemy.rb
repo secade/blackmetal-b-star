@@ -78,18 +78,20 @@ class Turret
     @game = game
     @hp = MaxHp
     calc_anim
-    @ticker = 0
+    @orb_timer = rand(40..100)
+    @ticker = @orb_timer
     @color = Color.create
     @width = @height = 32
     @vy = 4
     @x, @y = x, y
-    @value = 1
+    @value = 10
   end
 
   def update
     calc_anim
     @y += @vy
-    if rand(1000) < 5
+
+    if tick
       shoot_orb
     end
   end
@@ -117,7 +119,18 @@ class Turret
     end
   end
 
+  def tick
+    @ticker -= 1
+    @ticker <= 0
+  end
+
   def shoot_orb
-    Bullets.create({game: @game, x: @x + 4, y: @y + 4, vels: {x: 6, y: 0}, type: :e_orb})
+    @ticker = @orb_timer
+    Bullets.create({game: @game, x: @x + 4, y: @y + 4, vels: calc_orb_vels, type: :e_orb})
+  end
+
+  def calc_orb_vels
+    a = Player.calc_angle_from_p(@x, @y)
+    Tracker.calc_vectors(6, a)
   end
 end

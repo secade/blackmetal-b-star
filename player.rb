@@ -1,6 +1,7 @@
 class Player
   include Collidable
 
+  @@players = []
   @@score = 0
 
   def self.score 
@@ -11,12 +12,17 @@ class Player
     @@score += value
   end
 
+  def self.calc_angle_from_p(x, y)
+    Gosu.angle(x, y, @@players.first.x, @@players.first.y) - 90
+  end
+
   attr_accessor :x, :y, :health, :max_health, :star_timer
 
   MaxHealth = 50
   StarTimer = 200
 
   def initialize(game)
+    @@players << self
     @game = game
     @image = game.images.player.squid
     @x, @y = 304, 448

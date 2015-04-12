@@ -24,6 +24,8 @@ class ControllerPlayer
       fire_orbs if @mode == :alive 
     when Gosu::KbZ
       fire_stars if @mode == :alive && @player.star_ready?
+    when Gosu::KbU
+      binding.pry
     when Gosu::KbEscape
       end_game
     end

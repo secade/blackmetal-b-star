@@ -43,8 +43,10 @@ class StatePlay < StateMachine
   end
 
   def generate_turret
-    if rand(100) < 4
-      Enemies.create(@game,rand(8..600), -32, :turret)
+    if rand(100) < 2
+      [[32, Game::FIELD_W - 64], [64, Game::FIELD_W - 96]].sample.each do |x|
+        Enemies.create(@game, x, -32, :turret)
+      end
     end
   end
 
