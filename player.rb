@@ -5,7 +5,7 @@ class Player
 
   def initialize(game)
     @image = game.images.player.squid
-    @x, @y = (640 - 32) / 2, (480 - 32) / 2
+    @x, @y = 304, 448
     @vx = @vy = 0
     @width, @height = @image.width, @image.height
   end
@@ -31,7 +31,6 @@ class Player
   end
 
   def collide
-
   end
 
   private

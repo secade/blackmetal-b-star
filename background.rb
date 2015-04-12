@@ -5,7 +5,7 @@ class Background
     calc_images
 
     @y = -1080 * 2 - 480
-    @vel = 8
+    @vel = 4
   end
 
   def update

@@ -24,7 +24,7 @@ module Enemies
 
   def self.clean #destroy off-screen enemies
     @@enemies.delete_if do |e|
-      e.x + e.width < 0 || e.x > 640 || e.y + e.height < -40 || e.y > 480
+      e.x + e.width < 0 || e.x > Game::FIELD_WIDTH || e.y + e.height < 0 || e.y > Game::FIELD_WIDTH 
     end
   end
 end

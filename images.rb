@@ -25,10 +25,11 @@ class Images
   end
 
   class Bullets
-    attr_reader :small
+    attr_reader :small, :enemy_small
 
     def initialize(game)
       @small = Gosu::Image.load_tiles(game, "assets/img/bullet.png", 6, 13, false)
+      @enemy_small = Gosu::Image.load_tiles(game, "assets/img/enemy_bullet.png", 6, 13, false)
     end
   end
 

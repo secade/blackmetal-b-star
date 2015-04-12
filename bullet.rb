@@ -1,4 +1,5 @@
 class Bullet
+  include Collidable
   attr_accessor :type, :x, :y, :width, :height
 
   def initialize(game, x, y)
@@ -21,6 +22,21 @@ class Bullet
 
   def collide
     Bullets.destroy(self)
-    Explosions.create(@game, x, y)
+    Explosions.create(@game, @x, @y)
   end
+end
+
+class EnemyBullet < Bullet
+  def initialize(game, x, y)
+    super
+    @image = game.images.bullets.enemy_small
+    @type = :enemy
+    @color = Color.create
+    @vel = -6
+  end
+
+  def draw
+    current_img = @image[Gosu::milliseconds / 100 % @image.size]
+    current_img.draw(@x, @y, ZOrder::Missiles, 2, 2, @color)
+  end  
 end

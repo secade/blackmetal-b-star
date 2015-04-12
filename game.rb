@@ -1,4 +1,6 @@
 class Game < Gosu::Window
+  FIELD_WIDTH = 640
+  FIELD_HEIGHT = 480
   attr_accessor :images
 
   def initialize 

@@ -4,8 +4,9 @@ class Enemy
 
   def initialize(game, x, y)
     @image = game.images.enemies.ruby
+    @game = game
     @ticker = 0
-    calc_color
+    @color = Color.create
     calc_ybound
     calc_xbound
     @vel = rand * (2.0) + 2.0
@@ -15,12 +16,15 @@ class Enemy
   end
 
   def update
-    if rand(100) < 4
+    if rand(100) < 5
       @ticker += 10
     end
     impulse
     @x += @vx
     @y += @vy
+    if rand(1000) < 5
+      shoot_missile
+    end
   end
 
   def impulse
@@ -58,10 +62,7 @@ class Enemy
     @xbound = rand(100..320)
   end
 
-  def calc_color
-    @color = Gosu::Color.new(0xff000000)
-    @color.red = rand(256 - 40) + 40
-    @color.green = rand(256 - 40) + 40
-    @color.blue = rand(256 - 40) + 40
+  def shoot_missile
+    Bullets.create(@game, @x, @y)
   end
 end
