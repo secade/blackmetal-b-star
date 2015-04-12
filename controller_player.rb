@@ -1,4 +1,4 @@
-class Controller
+class ControllerPlayer
   def initialize(game, player)
     @game = game
     @player = player
