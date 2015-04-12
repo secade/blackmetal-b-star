@@ -22,7 +22,7 @@ class Bullet
 
   def collide(collidable)
     Bullets.destroy(self)
-    Explosions.create(@game, @x, @y)
+    Explosions.create(@game, @x, @y, @image.first.width, @type == :enemy ? @image.first.height : 0)
   end
 end
 

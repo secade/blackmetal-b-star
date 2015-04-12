@@ -10,7 +10,7 @@ class Player
     @image = game.images.player.squid
     @x, @y = 304, 448
     @vx = @vy = 0
-    @width, @height = @image.width, @image.height
+    @width, @height = @image.width * 2, @image.height * 2
     @health = MaxHealth
   end
 
@@ -37,7 +37,7 @@ class Player
 
   def collide(collidable)
     @health -= 1
-    Explosions.create(@game, @x, @y, :contact) if collidable.is_a?(Enemy)
+    Explosions.create(@game, @x, @y, @image.width, @image.height, :contact) if collidable.is_a?(Enemy)
   end
 
   def alive?

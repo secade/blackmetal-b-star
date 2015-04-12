@@ -1,8 +1,8 @@
 class Explosion
-  def initialize(game, x, y)
+  def initialize(game, x, y, x_dis, y_dis)
     @image = game.images.explosions.small
     @max_time = 60
-    @x, @y = x, y
+    @x, @y = x - @image.first.width / 2 + x_dis, y - @image.first.height / 2 + y_dis
     @img_interval = 15
     @time = 0
   end
@@ -19,7 +19,7 @@ class Explosion
 end
 
 class ExplosionContact < Explosion
-  def initialize(game, x, y)
+  def initialize(game, x, y, x_dis, y_dis)
     super
     @image = game.images.explosions.contact
     @max_time = 20
