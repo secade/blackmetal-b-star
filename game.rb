@@ -8,7 +8,9 @@ class Game < Gosu::Window
     @player = Player.new(self)
     @controller = Controller.new(self, @player)
     @missiles = Missiles.new(self)
-    @updatables = [@background, @controller, @player, @missiles]
+    @enemies = Enemies.new(self)
+    @updatables = [@background, @controller, @player, @missiles, @enemies]
+    @drawables = @updatables - [@controller]
   end
 
   def update
@@ -16,9 +18,7 @@ class Game < Gosu::Window
   end
 
   def draw
-    @background.draw
-    @player.draw
-    @missiles.draw
+    @drawables.each { |d| d.draw}
   end
 
   def button_down(id)

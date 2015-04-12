@@ -10,6 +10,8 @@ require_relative 'player'
 require_relative 'controller'
 require_relative 'missiles'
 require_relative 'bullet'
+require_relative 'enemies'
+require_relative 'enemy'
 
 # initialize game
 game = Game.new

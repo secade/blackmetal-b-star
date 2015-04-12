@@ -30,7 +30,6 @@ class Background
   end
 
   def reset_picture
-    puts @frame
     @y = -1080 * 2
     @frame = (@frame + 1) % 6
     calc_images

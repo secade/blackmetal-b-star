@@ -1,4 +1,8 @@
 class Missiles
+  def self.destroy(bullet)
+    @bullets.delete(bullet)
+  end
+
   def initialize(game)
     @game = game
     @bullets = []
