@@ -1,5 +1,5 @@
 class Images
-  attr_reader :maps, :player, :enemies, :bullets, :explosions
+  attr_reader :fonts, :maps, :player, :enemies, :bullets, :explosions
 
   def initialize(game)
     @maps = Images::Maps.new(game)
@@ -7,6 +7,15 @@ class Images
     @enemies = Images::Enemies.new(game)
     @bullets = Images::Bullets.new(game)
     @explosions = Images::Explosions.new(game)
+
+  end
+
+  class Fonts
+    attr_reader :text
+
+    def initialize(game)
+      @text = Gosu::Font.new(@window, "Courier", 24)
+    end
   end
 
   class Maps

@@ -1,21 +1,25 @@
 class Player
   include Collidable
 
-  attr_accessor :x, :y, :health
+  attr_accessor :x, :y, :health, :max_health
+
+  MaxHealth = 100
 
   def initialize(game)
     @image = game.images.player.squid
     @x, @y = 304, 448
     @vx = @vy = 0
     @width, @height = @image.width, @image.height
-    @health = 100
+    @health = MaxHealth
   end
 
   def update
-    boundaries
-    @x += @vx
-    @y += @vy
-    drag
+    if alive?
+      boundaries
+      @x += @vx
+      @y += @vy
+      drag
+    end
   end
 
   def impulse(dir)
@@ -28,10 +32,15 @@ class Player
   end
 
   def draw
-    @image.draw(@x, @y, ZOrder::Player)
+    @image.draw(@x, @y, ZOrder::Player) if alive?
   end
 
   def collide
+    @health -= 1
+  end
+
+  def alive?
+    @health > 0
   end
 
   private

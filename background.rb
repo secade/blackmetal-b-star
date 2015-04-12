@@ -23,7 +23,7 @@ class Background
       @image_above.draw(0, @y, ZOrder::Background, 2, 2)
       @image_below.draw(0, @y + 1080 * 2, ZOrder::Background, 2, 2)
     else
-      @map.draw_as_quad(0, 0, Color.null, Game::CANVAS_W, 0, Color.null, 0, Game::CANVAS_H, Color.null, Game::CANVAS_W, Game::CANVAS_H, Color.null, ZOrder::Background)
+      @map.draw_as_quad(0, 0, Color::Null, Game::CANVAS_W, 0, Color::Null, 0, Game::CANVAS_H, Color::Null, Game::CANVAS_W, Game::CANVAS_H, Color::Null, ZOrder::Background)
     end
   end
 

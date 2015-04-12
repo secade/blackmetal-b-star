@@ -7,23 +7,13 @@ module Color
     color
   end
 
-  def self.white
-    0xffffffff
-  end
+  White = 0xffffffff
 
-  def self.black
-    0xff000000
-  end
+  Black = 0xff000000
 
-  def self.red
-    0xffff0000
-  end
+  Red = 0xffff0000
 
-  def self.green
-    0xff00ff00
-  end
+  Green = 0xff00ff00
 
-  def self.null
-    0xFFffffff
-  end
+  Null = 0xffffffff
 end
