@@ -15,7 +15,7 @@ class Enemy
 
   def update
     if rand(100) < 4
-      @ticker += 5
+      @ticker += 10
     end
     impulse
     @x += @vx
@@ -45,6 +45,10 @@ class Enemy
 
   def collide?(collidable)
     (@x - collidable.x).abs <= @width && (@y - collidable.y).abs <= @height
+  end
+
+  def collide
+    Enemies.destroy(self)
   end
 
   private

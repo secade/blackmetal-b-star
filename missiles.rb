@@ -1,4 +1,4 @@
-class Missiles
+module Bullets
   @@bullets = []
 
   def self.bullets

@@ -22,7 +22,7 @@ class Controller
   def button_down(id)
     case id 
     when Gosu::KbSpace
-      Missiles.create(@game, @player.x, @player.y)
+      Bullets.create(@game, @player.x, @player.y)
     when Gosu::KbEscape
       @game.close
     end

@@ -19,7 +19,7 @@ class Bullet
   end
 
   def collide
-    Missiles.destroy(self)
+    Bullets.destroy(self)
     Explosions.create(@game, x, y)
   end
 end

@@ -1,4 +1,4 @@
-class Explosions
+module Explosions
   @@explosions = []
 
   def self.explosions

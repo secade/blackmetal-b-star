@@ -1,21 +1,10 @@
 class CollisionEngine
-  def initialize(player, enemies, missiles)
-    @player = player
-    @enemies = enemies
-    @missiles = missiles
-  end
-
-  def update
-    collision_check
-  end
-
-  def collision_check
-    @enemies.enemies.each do |e|
-      Missiles.bullets.each do |b|
+  def self.check
+    Enemies.enemies.each do |e|
+      Bullets.bullets.each do |b|
         if e.collide?(b)
           b.collide
-          # @missiles.destroy(b)
-          # Enemies.destroy(e)
+          e.collide
         end
       end
     end
