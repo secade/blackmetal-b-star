@@ -1,11 +1,21 @@
 class Images
-  attr_reader :player, :enemies, :bullets, :explosions
+  attr_reader :maps, :player, :enemies, :bullets, :explosions
 
   def initialize(game)
+    @maps = Images::Maps.new(game)
     @player = Images::Player.new(game)
     @enemies = Images::Enemies.new(game)
     @bullets = Images::Bullets.new(game)
     @explosions = Images::Explosions.new(game)
+  end
+
+  class Maps
+    attr_reader :space_img, :space_tiles
+
+    def initialize(game)
+      @space_img = Gosu::Image.new(game, "assets/img/space.jpg", false)
+      @space_tiles = Gosu::Image::load_tiles(game, "assets/img/space.jpg", 320, 1080, false)
+    end
   end
 
   class Player

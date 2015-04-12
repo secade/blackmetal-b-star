@@ -1,10 +1,12 @@
 class Game < Gosu::Window
+  CANVAS_W = 768
+  CANVAS_H = 480
   FIELD_WIDTH = 640
   FIELD_HEIGHT = 480
   attr_accessor :images
 
   def initialize 
-    super 768, 480, false
+    super CANVAS_W, CANVAS_H, false
     self.caption = 'Blackmetal B* Demo'
     @images = Images.new(self)
     @state_machine = StateMachine.new(self)

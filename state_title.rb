@@ -2,8 +2,8 @@ class StateTitle
   def initialize(game)
     @game = game
     @controller = ControllerMenu.new(game)
-    @background = Background.new(game)
-    @menu = Menu.new(game)
+    @background = Background.new(game, false)
+    # @menu = Menu.new(game)
   end
 
   def update
@@ -12,7 +12,7 @@ class StateTitle
 
   def draw
     @background.draw
-    @menu.draw
+    # @menu.draw
   end
 
   def button_down(id)
