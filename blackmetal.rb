@@ -28,5 +28,6 @@ require_relative 'enemy'
 
 # initialize game
 game = Game.new
+
 # binding.pry
 game.show

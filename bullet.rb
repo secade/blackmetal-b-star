@@ -25,6 +25,10 @@ class Bullet
     Bullets.destroy(self)
     Explosions.create(@game, @x, @y, @image.first.width, @type == :enemy ? @image.first.height : 0)
   end
+
+  def off_screen?
+    @x + @width < 0 || @x > Game::FIELD_W || @y + @height < 0 || @y > Game::FIELD_W
+  end
 end
 
 class EnemyBullet < Bullet
@@ -39,5 +43,23 @@ class LightOrb < Bullet
   def initialize(hash)
     super
     @image = @game.images.bullets.light_orb
+  end
+end
+
+class Star < Bullet
+  def initialize(hash)
+    super
+    @image = @game.images.bullets.spinning_star
+    @first_gen = hash[:first_gen]
+  end
+
+  def collide(collidable)
+    Bullets.destroy(self)
+    Explosions.create(@game, @x, @y, @image.first.width, @type == :enemy ? @image.first.height : 0)
+    if @first_gen
+      [[6,0], [-6, 0], [0, 6], [0, -6], [6, 6], [6, -6], [-6, 6], [-6, -6]].each do |vels|
+        Bullets.create({game: @game, x: @x, y: @y, vels: {x: vels[0], y: vels[1]}, type: :p_star})
+      end
+    end
   end
 end

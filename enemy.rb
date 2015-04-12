@@ -1,6 +1,6 @@
 class Enemy
   include Collidable
-  attr_accessor :x, :y, :width, :height
+  attr_accessor :x, :y, :width, :height, :value
 
   def initialize(game, x, y)
     @image = game.images.enemies.ruby
@@ -13,6 +13,7 @@ class Enemy
     @x, @y = x, y
     @vx, @vy = 4, 4
     @width = @height = 32
+    @value = 1
   end
 
   def update

@@ -9,18 +9,10 @@ class ControllerPlayer
 
   def update
     if @mode == :alive
-      if @game.button_down? Gosu::KbLeft
-        @player.impulse(:left)
-      end
-      if @game.button_down? Gosu::KbRight
-        @player.impulse(:right)
-      end
-      if @game.button_down? Gosu::KbUp
-        @player.impulse(:up)
-      end
-      if @game.button_down? Gosu::KbDown
-        @player.impulse(:down)
-      end
+      @player.impulse(:left) if @game.button_down? Gosu::KbLeft
+      @player.impulse(:right) if @game.button_down? Gosu::KbRight
+      @player.impulse(:up) if @game.button_down? Gosu::KbUp
+      @player.impulse(:down) if @game.button_down? Gosu::KbDown
     end
   end
 
@@ -30,6 +22,8 @@ class ControllerPlayer
       @mode == :alive ? fire_bullet : end_game
     when Gosu::KbLeftControl
       fire_orbs if @mode == :alive 
+    when Gosu::KbZ
+      fire_stars if @mode == :alive && @player.star_ready?
     when Gosu::KbEscape
       end_game
     end
@@ -40,8 +34,15 @@ class ControllerPlayer
   end
 
   def fire_orbs
-    Bullets.create({game: @game, x: @player.x, y: @player.y, vels: {x: -3, y: -6}, type: :p_light_orbs})
-    Bullets.create({game: @game, x: @player.x, y: @player.y, vels: {x: 3, y: -6}, type: :p_light_orbs})
+    Bullets.create({game: @game, x: @player.x, y: @player.y, vels: {x: -3, y: -6}, type: :p_light_orb})
+    Bullets.create({game: @game, x: @player.x, y: @player.y, vels: {x: 3, y: -6}, type: :p_light_orb})
+  end
+
+  def fire_stars
+    @player.start_star_timer
+    [[6,0], [-6, 0], [0, 6], [0, -6], [6, 6], [6, -6], [-6, 6], [-6, -6]].each do |vels|
+      Bullets.create({game: @game, x: @player.x, y: @player.y, vels: {x: vels[0], y: vels[1]}, type: :p_star, first_gen: true })
+    end
   end
 
   def end_game

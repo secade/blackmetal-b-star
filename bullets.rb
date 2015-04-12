@@ -19,8 +19,10 @@ module Bullets
     case hash[:type]
     when :p_bullet
       @@player_bullets << Bullet.new(hash)
-    when :p_light_orbs
+    when :p_light_orb
       @@player_bullets << LightOrb.new(hash)
+    when :p_star
+      @@player_bullets << Star.new(hash)
     when :e_bullet
       @@enemy_bullets << EnemyBullet.new(hash)
     end
@@ -37,7 +39,7 @@ module Bullets
   end
 
   def self.clean(bullets)
-    bullets.delete_if { |b| b.x + b.width < 0 || b.x > Game::FIELD_W || b.y + b.height < 0 || b.y > Game::FIELD_W }
+    bullets.delete_if(&:off_screen?)
   end
 
   def self.bullets

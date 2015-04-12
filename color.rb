@@ -15,5 +15,7 @@ module Color
 
   Green = 0xff00ff00
 
+  Blue = 0xff0000ff
+
   Null = 0xffffffff
 end

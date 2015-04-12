@@ -19,6 +19,7 @@ module Enemies
   end
 
   def self.destroy(enemy)
+    Player.score_up(enemy.value)
     @@enemies.delete(enemy)
   end
 

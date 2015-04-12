@@ -1,9 +1,20 @@
 class Player
   include Collidable
 
-  attr_accessor :x, :y, :health, :max_health
+  @@score = 0
 
-  MaxHealth = 100
+  def self.score 
+    @@score
+  end
+
+  def self.score_up(value)
+    @@score += value
+  end
+
+  attr_accessor :x, :y, :health, :max_health, :star_timer
+
+  MaxHealth = 50
+  StarTimer = 200
 
   def initialize(game)
     @game = game
@@ -12,14 +23,17 @@ class Player
     @vx = @vy = 0
     @width, @height = 32
     @health = MaxHealth
+    @star_timer = 0
   end
 
   def update
+    @star_timer -= 1 if @star_timer > 0
     boundaries
     @x += @vx
     @y += @vy
     drag
     alive?
+
   end
 
   def impulse(dir)
@@ -42,6 +56,14 @@ class Player
 
   def alive?
     @health > 0
+  end
+
+  def start_star_timer
+    @star_timer = StarTimer
+  end
+
+  def star_ready?
+    @star_timer == 0
   end
 
   private
