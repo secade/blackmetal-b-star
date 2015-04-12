@@ -34,9 +34,4 @@ class EnemyBullet < Bullet
     @color = Color.create
     @vel = -6
   end
-
-  def draw
-    current_img = @image[Gosu::milliseconds / 100 % @image.size]
-    current_img.draw(@x, @y, ZOrder::Missiles, 2, 2, @color)
-  end  
 end

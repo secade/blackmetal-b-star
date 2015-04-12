@@ -4,7 +4,7 @@ class Game < Gosu::Window
   attr_accessor :images
 
   def initialize 
-    super 640, 480, false
+    super 768, 480, false
     self.caption = 'Blackmetal B* Demo'
     @images = Images.new(self)
     @background = Background.new(self)

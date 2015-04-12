@@ -2,11 +2,11 @@ class CollisionEngine
   def self.check(player)
     baddies = Enemies.enemies + Bullets.enemy_bullets
     goodies = [player] + Bullets.player_bullets
-    baddies.each do |c|
-      goodies.each do |b|
-        if c.collide?(b)
+    baddies.each do |b|
+      goodies.each do |g|
+        if b.collide?(g)
           b.collide
-          c.collide
+          g.collide
         end
       end
     end
