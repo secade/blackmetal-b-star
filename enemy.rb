@@ -63,6 +63,6 @@ class Enemy
   end
 
   def shoot_missile
-    Bullets.create(@game, @x, @y)
+    Bullets.create({game: @game, x: @x, y: @y, vels: {x: 0, y: 6}, type: :e_bullet})
   end
 end

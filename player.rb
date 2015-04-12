@@ -10,7 +10,7 @@ class Player
     @image = game.images.player.squid
     @x, @y = 304, 448
     @vx = @vy = 0
-    @width, @height = @image.width * 2, @image.height * 2
+    @width, @height = 32
     @health = MaxHealth
   end
 

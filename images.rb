@@ -44,11 +44,13 @@ class Images
   end
 
   class Bullets
-    attr_reader :small, :enemy_small
+    attr_reader :small, :enemy_small, :light_orb, :spinning_star
 
     def initialize(game)
       @small = Gosu::Image.load_tiles(game, "assets/img/bullet.png", 6, 13, false)
       @enemy_small = Gosu::Image.load_tiles(game, "assets/img/enemy_bullet.png", 6, 13, false)
+      @light_orb = Gosu::Image.load_tiles(game, "assets/img/light_orb.png", 8, 8, false)
+      @spinning_star = Gosu::Image.load_tiles(game, "assets/img/spinning_star.png", 8, 8, false)
     end
   end
 

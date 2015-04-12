@@ -15,12 +15,14 @@ module Bullets
     @@enemy_bullets.delete(bullet)
   end
 
-  def self.create(game, x, y, type = :enemy)
-    case type
-    when :player  
-      @@player_bullets << Bullet.new(game, x, y)
-    when :enemy
-      @@enemy_bullets << EnemyBullet.new(game, x, y)
+  def self.create(hash)
+    case hash[:type]
+    when :p_bullet
+      @@player_bullets << Bullet.new(hash)
+    when :p_light_orbs
+      @@player_bullets << LightOrb.new(hash)
+    when :e_bullet
+      @@enemy_bullets << EnemyBullet.new(hash)
     end
   end
 

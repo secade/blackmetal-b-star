@@ -2,17 +2,18 @@ class Bullet
   include Collidable
   attr_accessor :type, :x, :y, :width, :height
 
-  def initialize(game, x, y)
-    @game = game
-    @image = game.images.bullets.small
-    @type = :player
-    @x, @y = x + 13, y
-    @width, @height = 12, 26
-    @vel = 6
+  def initialize(hash)
+    @game = hash[:game]
+    @image = @game.images.bullets.small
+    @type = hash[:type] || :enemy
+    @x, @y = hash[:x], hash[:y]
+    @width, @height = @image.first.width * 2, @image.first.height * 2
+    @vx, @vy = hash[:vels][:x], hash[:vels][:y]
   end
 
   def update
-    @y -= @vel
+    @x += @vx
+    @y += @vy
   end
 
   def draw
@@ -27,11 +28,16 @@ class Bullet
 end
 
 class EnemyBullet < Bullet
-  def initialize(game, x, y)
+  def initialize(hash)
     super
-    @image = game.images.bullets.enemy_small
-    @type = :enemy
+    @image = @game.images.bullets.enemy_small
     @color = Color.create
-    @vel = -6
+  end
+end
+
+class LightOrb < Bullet
+  def initialize(hash)
+    super
+    @image = @game.images.bullets.light_orb
   end
 end
