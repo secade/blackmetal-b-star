@@ -1,8 +1,9 @@
 class Enemy
+  include Collidable
   attr_accessor :x, :y, :width, :height
 
   def initialize(game, x, y)
-    @image = Gosu::Image.load_tiles(game, "assets/img/ruby_down.png", 16, 16, false)
+    @image = game.images.enemies.ruby
     @ticker = 0
     calc_color
     calc_ybound
@@ -41,10 +42,6 @@ class Enemy
   def draw
     current_img = @image[Gosu::milliseconds / 200 % @image.size]
     current_img.draw(@x, @y, ZOrder::Enemies, 2, 2, @color)
-  end
-
-  def collide?(collidable)
-    (@x - collidable.x).abs <= @width && (@y - collidable.y).abs <= @height
   end
 
   def collide

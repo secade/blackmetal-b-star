@@ -1,9 +1,13 @@
 class Player
+  include Collidable
+
   attr_accessor :x, :y
+
   def initialize(game)
-    @image = Gosu::Image.new(game, "assets/img/squid.png", false)
+    @image = game.images.player.squid
     @x, @y = (640 - 32) / 2, (480 - 32) / 2
     @vx = @vy = 0
+    @width, @height = @image.width, @image.height
   end
 
   def update
@@ -27,6 +31,7 @@ class Player
   end
 
   def collide
+
   end
 
   private

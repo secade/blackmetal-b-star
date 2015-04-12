@@ -1,10 +1,11 @@
 class CollisionEngine
-  def self.check
-    Enemies.enemies.each do |e|
+  def self.check(player)
+    collidables = Enemies.enemies + [player]
+    collidables.each do |c|
       Bullets.bullets.each do |b|
-        if e.collide?(b)
+        if c.collide?(b)
           b.collide
-          e.collide
+          c.collide
         end
       end
     end

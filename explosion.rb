@@ -1,6 +1,6 @@
 class Explosion
   def initialize(game, x, y)
-    @image = Gosu::Image.load_tiles(game, "assets/img/explosion.png", 16, 16, false)
+    @image = game.images.explosions.small
     @x, @y = x, y
     @time = 0
   end

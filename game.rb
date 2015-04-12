@@ -1,7 +1,10 @@
 class Game < Gosu::Window
+  attr_accessor :images
+
   def initialize 
     super 640, 480, false
     self.caption = 'Blackmetal B* Demo'
+    @images = Images.new(self)
     @background = Background.new(self)
     @player = Player.new(self)
     @controller = Controller.new(self, @player)
@@ -13,11 +16,11 @@ class Game < Gosu::Window
     Bullets.update
     Enemies.update
     Explosions.update
-    if rand(100) < 4 && Enemies.enemies.size < 2
+    if rand(100) < 14 && Enemies.enemies.size < 25
       generate_enemy
     end
     @updatables.each { |u| u.update}
-    CollisionEngine.check
+    CollisionEngine.check(@player)
   end
 
   def draw

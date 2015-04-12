@@ -1,9 +1,10 @@
 class Bullet
-  attr_accessor :x, :y, :width, :height
+  attr_accessor :type, :x, :y, :width, :height
 
   def initialize(game, x, y)
     @game = game
-    @image = Gosu::Image.load_tiles(game, "assets/img/bullet.png", 6, 13, false)
+    @image = game.images.bullets.small
+    @type = :player
     @x, @y = x + 13, y
     @width, @height = 12, 26
     @vel = 6
