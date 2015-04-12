@@ -24,7 +24,7 @@ class ControllerPlayer
     when Gosu::KbSpace
       Bullets.create(@game, @player.x, @player.y, :player)
     when Gosu::KbEscape
-      @game.close
+      @game.state_machine.new_state(:title)
     end
   end
 end

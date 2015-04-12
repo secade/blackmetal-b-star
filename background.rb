@@ -2,8 +2,8 @@ class Background
   def initialize(game, scrolling = true)
     @game = game
     load_map(scrolling)
-    calc_images if scrolling
     @frame = 0
+    calc_images if scrolling
 
     @y = -1080 * 2 - 480
     @vel = 4

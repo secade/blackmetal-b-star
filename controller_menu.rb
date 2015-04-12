@@ -7,11 +7,13 @@ class ControllerMenu
   end
 
   def button_down(id)
-    case id 
-    when Gosu::KbSpace
-      # Bullets.create(@game, @player.x, @player.y, :player)
-    when Gosu::KbEscape
-      # @game.close
+    case id
+    when Gosu::KbRight
+    when Gosu::KbLeft
+    when Gosu::KbUp
+    when Gosu::KbDown
+    when Gosu::KbReturn, Gosu::KbSpace then @game.state_machine.new_state(:play)
+    when Gosu::KbEscape then @game.close
     end
   end
 end

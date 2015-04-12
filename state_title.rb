@@ -16,14 +16,6 @@ class StateTitle
   end
 
   def button_down(id)
-    case id
-    when Gosu::KbRight
-    when Gosu::KbLeft
-    when Gosu::KbUp
-    when Gosu::KbDown
-    when Gosu::KbReturn || Gosu::KbSpace
-    when Gosu::KbEscape then @game.close
-    end
-    puts id
+    @controller.button_down(id)
   end
 end

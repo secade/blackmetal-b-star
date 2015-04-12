@@ -3,7 +3,7 @@ class Game < Gosu::Window
   CANVAS_H = 480
   FIELD_WIDTH = 640
   FIELD_HEIGHT = 480
-  attr_accessor :images
+  attr_accessor :images, :state_machine
 
   def initialize 
     super CANVAS_W, CANVAS_H, false

@@ -22,12 +22,18 @@ class StateMachine
     end
   end
 
-  def title_state
+  def previous_state
+    @previous_state, @current_state = @current_state, @previous_state
+  end
 
+  def title_state
+    @previous_state = @current_state
+    @current_state = StateTitle.new(@game)
   end
 
   def play_state
-
+    @previous_state = @current_state
+    @current_state = StatePlay.new(@game)
   end
 
   def button_down(id)
