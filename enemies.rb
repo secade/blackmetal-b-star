@@ -1,7 +1,5 @@
 class Enemies
-  def self.destroy(enemy)
-    @enemies.delete(enemy)
-  end
+  attr_accessor :enemies
 
   def initialize(game)
     @game = game
@@ -13,7 +11,7 @@ class Enemies
   end
 
   def update
-    if rand(1000) < 4 && @enemies.size < 5
+    if rand(100) < 4 && @enemies.size < 25
       generate
     end
     @enemies.each { |e| e.update }
@@ -22,6 +20,10 @@ class Enemies
 
   def draw
     @enemies.each { |e| e.draw }
+  end
+
+  def destroy(enemy)
+    @enemies.delete(enemy)
   end
 
   private

@@ -26,6 +26,9 @@ class Player
     @image.draw(@x, @y, ZOrder::Player)
   end
 
+  def collide
+  end
+
   private
 
   def boundaries

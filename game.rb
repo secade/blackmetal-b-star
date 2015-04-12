@@ -1,5 +1,4 @@
 class Game < Gosu::Window
-  attr_accessor :missiles
 
   def initialize 
     super 640, 480, false
@@ -7,17 +6,19 @@ class Game < Gosu::Window
     @background = Background.new(self)
     @player = Player.new(self)
     @controller = Controller.new(self, @player)
-    @missiles = Missiles.new(self)
     @enemies = Enemies.new(self)
-    @updatables = [@background, @controller, @player, @missiles, @enemies]
-    @drawables = @updatables - [@controller]
+    @collision = CollisionEngine.new(@player, @enemies, @missiles)
+    @updatables = [@background, @controller, @player, @enemies, @collision]
+    @drawables = @updatables - [@controller, @collision]
   end
 
   def update
+    Missiles.update
     @updatables.each { |u| u.update}
   end
 
   def draw
+    Missiles.draw
     @drawables.each { |d| d.draw}
   end
 

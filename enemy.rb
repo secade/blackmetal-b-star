@@ -1,5 +1,5 @@
 class Enemy
-  attr_accessor :x, :y
+  attr_accessor :x, :y, :width, :height
 
   def initialize(game, x, y)
     @image = Gosu::Image.load_tiles(game, "assets/img/ruby_down.png", 16, 16, false)
@@ -10,6 +10,7 @@ class Enemy
     @vel = rand * (2.0) + 2.0
     @x, @y = x, y
     @vx, @vy = 4, 4
+    @width = @height = 32
   end
 
   def update
@@ -42,12 +43,8 @@ class Enemy
     current_img.draw(@x, @y, ZOrder::Enemies, 2, 2, @color)
   end
 
-  def width
-    16
-  end
-
-  def height
-    16
+  def collide?(collidable)
+    (@x - collidable.x).abs <= @width && (@y - collidable.y).abs <= @height
   end
 
   private

@@ -1,8 +1,10 @@
 class Bullet
-  attr_accessor :x, :y
+  attr_accessor :x, :y, :width, :height
+
   def initialize(game, x, y)
-    @image = Gosu::Image.new(game, "assets/img/bullet.png", false)
-    @x, @y = x + (32 - @image.width) / 2, y
+    @image = Gosu::Image.load_tiles(game, "assets/img/bullet.png", 6, 13, false)
+    @x, @y = x + 13, y
+    @width, @height = 12, 26
     @vel = 6
   end
 
@@ -11,14 +13,12 @@ class Bullet
   end
 
   def draw
-    @image.draw(@x, @y, ZOrder::Missiles, 2, 2)
+    current_img = @image[Gosu::milliseconds / 100 % @image.size]
+    current_img.draw(@x, @y, ZOrder::Missiles, 2, 2)
   end
 
-  def width
-    @image.width
-  end
-
-  def height
-    @image.height
+  def collide
+    Missiles.destroy(self)
+    Explosions.create_small(x, y)
   end
 end
