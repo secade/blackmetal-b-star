@@ -53,10 +53,11 @@ class Images
   end
 
   class Explosions
-    attr_reader :small
+    attr_reader :small, :contact
 
     def initialize(game)
       @small = Gosu::Image.load_tiles(game, "assets/img/explosion.png", 16, 16, false)
+      @contact = Gosu::Image.load_tiles(game, "assets/img/contact.png", 8, 8, false)
     end
   end
 end

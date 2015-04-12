@@ -48,7 +48,7 @@ class Enemy
     current_img.draw(@x, @y, ZOrder::Enemies, 2, 2, @color)
   end
 
-  def collide
+  def collide(collidable)
     Enemies.destroy(self)
   end
 

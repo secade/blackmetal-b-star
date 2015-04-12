@@ -3,9 +3,10 @@ class Player
 
   attr_accessor :x, :y, :health, :max_health
 
-  MaxHealth = 10
+  MaxHealth = 100
 
   def initialize(game)
+    @game = game
     @image = game.images.player.squid
     @x, @y = 304, 448
     @vx = @vy = 0
@@ -34,8 +35,9 @@ class Player
     @image.draw(@x, @y, ZOrder::Player) if alive?
   end
 
-  def collide
+  def collide(collidable)
     @health -= 1
+    Explosions.create(@game, @x, @y, :contact) if collidable.is_a?(Enemy)
   end
 
   def alive?

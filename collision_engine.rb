@@ -5,8 +5,8 @@ class CollisionEngine
     baddies.each do |b|
       goodies.each do |g|
         if b.collide?(g)
-          b.collide
-          g.collide
+          b.collide(g)
+          g.collide(b)
         end
       end
     end

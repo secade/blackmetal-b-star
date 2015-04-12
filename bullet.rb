@@ -20,7 +20,7 @@ class Bullet
     current_img.draw(@x, @y, ZOrder::Missiles, 2, 2)
   end
 
-  def collide
+  def collide(collidable)
     Bullets.destroy(self)
     Explosions.create(@game, @x, @y)
   end

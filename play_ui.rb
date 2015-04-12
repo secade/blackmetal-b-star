@@ -8,7 +8,7 @@ class PlayUI
     @health_w = 64
     @mode = :alive
     @font = @game.images.fonts.text
-    @font_x = (Game::CANVAS_W - 312) / 2 # 312 is presumed length of font
+    @font_x = (Game::CANVAS_W - 312) / 2 # 312 is presumed length of death text
     @font_y = (Game::CANVAS_H - @font.height) / 2
   end
 

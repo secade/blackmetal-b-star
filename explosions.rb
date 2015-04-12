@@ -9,8 +9,13 @@ module Explosions
     @@explosions.delete(explosion)
   end
 
-  def self.create(game, x, y)
-    @@explosions << Explosion.new(game, x, y)
+  def self.create(game, x, y, type = :bullet)
+    case type
+    when :bullet
+      @@explosions << Explosion.new(game, x, y)
+    when :contact
+      @@explosions << ExplosionContact.new(game, x, y)
+    end
   end
 
   def self.update
