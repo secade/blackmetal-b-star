@@ -18,7 +18,7 @@ class PlayUI
 
   def check_health
     @health_h = Game::CANVAS_H - Game::CANVAS_H * @player.health / Player::MaxHealth
-    @player.health > 25 ? @color = Color.green : @color = Color.red
+    @player.health > Player::MaxHealth / 4 ? @color = Color::Green : @color = Color::Red
   end
 
   def draw
@@ -30,6 +30,6 @@ class PlayUI
   end
 
   def draw_death
-    @font.draw("You are dead!", @font_x, @font_y, Zorder::Fonts, 4.0, 4.0, Color::Black)
+    @font.draw("You are dead!", @font_x, @font_y, ZOrder::Fonts, 2.0, 2.0, Color::White)
   end
 end

@@ -22,7 +22,7 @@ class StateMachine
     end
   end
 
-  def previous_state
+  def swap_state
     @previous_state, @current_state = @current_state, @previous_state
   end
 

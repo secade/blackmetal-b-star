@@ -5,25 +5,31 @@ class StatePlay < StateMachine
     @player = Player.new(@game)
     @controller = ControllerPlayer.new(@game, @player)
     @ui = PlayUI.new(@game, @player)
-    @updatables = [@background, @controller, @player, @ui]
+    @updatables = [@background, @controller, @ui]
     @drawables = @updatables - [@controller]
+    @mode = :alive
   end
 
   def update
-    Bullets.update
-    Enemies.update
-    Explosions.update
-    if rand(100) < 14 && Enemies.enemies.size < 25
-      generate_enemy
+    if @player.update && @mode == :alive
+      Bullets.update
+      Enemies.update
+      Explosions.update
+      if rand(100) < 14 && Enemies.enemies.size < 25
+        generate_enemy
+      end
+      @updatables.each { |u| u.update }
+      CollisionEngine.check(@player)
+    else 
+      player_death
     end
-    @updatables.each { |u| u.update }
-    CollisionEngine.check(@player)
   end
 
   def draw
     Bullets.draw
     Enemies.draw
     Explosions.draw
+    @player.draw if @mode == :alive
     @drawables.each { |d| d.draw }
   end
 
@@ -33,5 +39,10 @@ class StatePlay < StateMachine
 
   def generate_enemy
     Enemies.create(@game,rand(8..600), -32)
+  end
+
+  def player_death
+    @ui.mode = :dead
+    @controller.mode = :dead
   end
 end

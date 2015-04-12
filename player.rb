@@ -3,7 +3,7 @@ class Player
 
   attr_accessor :x, :y, :health, :max_health
 
-  MaxHealth = 100
+  MaxHealth = 10
 
   def initialize(game)
     @image = game.images.player.squid
@@ -14,12 +14,11 @@ class Player
   end
 
   def update
-    if alive?
-      boundaries
-      @x += @vx
-      @y += @vy
-      drag
-    end
+    boundaries
+    @x += @vx
+    @y += @vy
+    drag
+    alive?
   end
 
   def impulse(dir)
