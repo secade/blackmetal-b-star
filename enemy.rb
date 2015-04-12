@@ -9,9 +9,9 @@ class Enemy
     @color = Color.create
     calc_ybound
     calc_xbound
-    @vel = rand * (2.0) + 2.0
+    @vel = rand * (2.0) + 2.0 * StatePlay.difficulty[:spd]
     @x, @y = x, y
-    @vx, @vy = 4, 4
+    @vx = @vy = @vel
     @width = @height = 32
     @value = 1
   end
@@ -23,7 +23,7 @@ class Enemy
     impulse
     @x += @vx
     @y += @vy
-    if rand(1000) < 5
+    if rand(1000) < 5 * StatePlay.difficulty[:fire_rate]
       shoot_missile
     end
   end
@@ -64,7 +64,7 @@ class Enemy
   end
 
   def shoot_missile
-    Bullets.create({game: @game, x: @x, y: @y, vels: {x: 0, y: 6}, type: :e_bullet})
+    Bullets.create({game: @game, x: @x, y: @y, vels: {x: 0, y: 6 * StatePlay.difficulty[:fire_spd]}, type: :e_bullet})
   end
 end
 
@@ -78,11 +78,11 @@ class Turret
     @game = game
     @hp = MaxHp
     calc_anim
-    @orb_timer = rand(40..100)
+    @orb_timer = rand(40..100) / StatePlay.difficulty[:fire_rate]
     @ticker = @orb_timer
     @color = Color.create
     @width = @height = 32
-    @vy = 4
+    @vy = 4 * StatePlay.difficulty[:spd]
     @x, @y = x, y
     @value = 10
   end
@@ -131,6 +131,6 @@ class Turret
 
   def calc_orb_vels
     a = Player.calc_angle_from_p(@x, @y)
-    Tracker.calc_vectors(6, a)
+    Tracker.calc_vectors(6 * StatePlay.difficulty[:fire_spd], a)
   end
 end

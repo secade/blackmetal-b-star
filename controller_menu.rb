@@ -12,7 +12,7 @@ class ControllerMenu
     when Gosu::KbLeft
     when Gosu::KbUp
     when Gosu::KbDown
-    when Gosu::KbReturn, Gosu::KbSpace then @game.state_machine.new_state(:play)
+    when Gosu::KbReturn, Gosu::KbSpace then @game.state_machine.new_state(:play, )
     when Gosu::KbEscape then @game.close
     end
   end

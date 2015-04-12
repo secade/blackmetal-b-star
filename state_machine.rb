@@ -13,12 +13,12 @@ class StateMachine
     @current_state.draw
   end
 
-  def new_state(state)
+  def new_state(state, options = {difficulty: Difficulty::Standard})
     case state
     when :title
-      title_state
+      title_state(options)
     when :play
-      play_state
+      play_state(options)
     end
   end
 
@@ -26,14 +26,14 @@ class StateMachine
     @previous_state, @current_state = @current_state, @previous_state
   end
 
-  def title_state
+  def title_state(options)
     @previous_state = @current_state
     @current_state = StateTitle.new(@game)
   end
 
-  def play_state
+  def play_state(options)
     @previous_state = @current_state
-    @current_state = StatePlay.new(@game)
+    @current_state = StatePlay.new(@game, options[:difficulty])
   end
 
   def button_down(id)
