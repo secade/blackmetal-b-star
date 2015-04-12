@@ -5,8 +5,13 @@ module Enemies
     @@enemies
   end
 
-  def self.create(game, x, y)
-    @@enemies << Enemy.new(game, x, y)
+  def self.create(game, x, y, type)
+    case type
+    when :small
+      @@enemies << Enemy.new(game, x, y)
+    when :turret
+      @@enemies << Turret.new(game, x, y)
+    end
   end
 
   def self.update

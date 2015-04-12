@@ -67,3 +67,57 @@ class Enemy
     Bullets.create({game: @game, x: @x, y: @y, vels: {x: 0, y: 6}, type: :e_bullet})
   end
 end
+
+class Turret
+  include Collidable
+  attr_accessor :x, :y, :width, :height, :value
+  MaxHp = 10
+
+  def initialize(game, x, y)
+    @image = game.images.enemies.turret
+    @game = game
+    @hp = MaxHp
+    calc_anim
+    @ticker = 0
+    @color = Color.create
+    @width = @height = 32
+    @vy = 4
+    @x, @y = x, y
+    @value = 1
+  end
+
+  def update
+    calc_anim
+    @y += @vy
+    if rand(1000) < 5
+      shoot_orb
+    end
+  end
+
+  def calc_anim
+    if @hp > MaxHp / 2 
+      @anim = @image[0..1]
+    elsif @hp > MaxHp / 4
+      @anim = @image[2..3]
+    else
+      @anim = @image[4..5]
+    end 
+  end
+
+  def draw
+    current_img = @anim[Gosu::milliseconds / 200 % @anim.size]
+    current_img.draw(@x, @y, ZOrder::Enemies, 2, 2)
+  end
+
+  def collide(collidable)
+    if @hp > 0
+      @hp += -1
+    else
+      Enemies.destroy(self)
+    end
+  end
+
+  def shoot_orb
+    Bullets.create({game: @game, x: @x + 4, y: @y + 4, vels: {x: 6, y: 0}, type: :e_orb})
+  end
+end

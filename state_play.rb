@@ -15,9 +15,8 @@ class StatePlay < StateMachine
       Bullets.update
       Enemies.update
       Explosions.update
-      if rand(100) < 14 && Enemies.enemies.size < 25
-        generate_enemy
-      end
+      generate_enemy
+      generate_turret
       @updatables.each { |u| u.update }
       CollisionEngine.check(@player)
     else 
@@ -38,7 +37,15 @@ class StatePlay < StateMachine
   end
 
   def generate_enemy
-    Enemies.create(@game,rand(8..600), -32)
+    if rand(100) < 14 && Enemies.enemies.size < 25
+      Enemies.create(@game,rand(8..600), -32, :small)
+    end
+  end
+
+  def generate_turret
+    if rand(100) < 4
+      Enemies.create(@game,rand(8..600), -32, :turret)
+    end
   end
 
   def player_death

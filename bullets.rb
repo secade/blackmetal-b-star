@@ -25,6 +25,8 @@ module Bullets
       @@player_bullets << Star.new(hash)
     when :e_bullet
       @@enemy_bullets << EnemyBullet.new(hash)
+    when :e_orb
+      @@enemy_bullets << LightOrb.new(hash)
     end
   end
 

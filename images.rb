@@ -36,10 +36,11 @@ class Images
   end
 
   class Enemies
-    attr_reader :ruby
+    attr_reader :ruby, :turret
 
     def initialize(game)
       @ruby = Gosu::Image.load_tiles(game, "assets/img/ruby_down.png", 16, 16, false)
+      @turret = Gosu::Image.load_tiles(game, "assets/img/orange_turret.png", 16, 16, false)
     end
   end
 

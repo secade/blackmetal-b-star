@@ -33,7 +33,6 @@ class Player
     @y += @vy
     drag
     alive?
-
   end
 
   def impulse(dir)
