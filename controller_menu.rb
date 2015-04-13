@@ -18,7 +18,7 @@ class ControllerMenu
     when Gosu::KbDown
       @menu.down
     when Gosu::KbReturn, Gosu::KbSpace
-      @game.state_machine.new_state(:play, difficulty: Difficulty.set(@menu.cursor))
+      @game.state_machine.new_state(:play, difficulty: Difficulty.find_by(id: @menu.cursor + 1))
     when Gosu::KbEscape
       @game.close
     end

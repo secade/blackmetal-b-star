@@ -14,7 +14,7 @@ class Menu
     @fx, @fy = (Game::CANVAS_W - 394) / 2, (Game::CANVAS_H - @h) / 8
     @color = Color::TitleStart
     @color_mode = :white # :white, :red, :blue, :green
-    @current_list = Difficulty::Names
+    @current_list = Difficulty.all.pluck(:name)
   end
 
   def update

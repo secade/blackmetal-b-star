@@ -3,13 +3,15 @@ require 'gosu'
 require 'find'
 require 'pry'
 
+# db config
+require ::File.expand_path('../config/environment',  __FILE__)
+
 # game files
 require_relative 'game'
 require_relative 'color'
 require_relative 'images'
 require_relative 'zorder'
 require_relative 'state_machine'
-require_relative 'difficulty'
 require_relative 'state_title'
 require_relative 'background'
 require_relative 'menu'

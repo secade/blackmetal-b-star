@@ -9,6 +9,12 @@ class CreateSchema < ActiveRecord::Migration
 
     create_table :difficulties do |t|
       t.string :name
+      t.float :max
+      t.float :gen
+      t.float :speed
+      t.float :fire_rate
+      t.float :fire_speed
+      t.float :enviro
     end
   end
 end

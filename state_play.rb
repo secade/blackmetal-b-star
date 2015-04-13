@@ -51,13 +51,13 @@ class StatePlay < StateMachine
   end
 
   def generate_enemy
-    if rand(100) < 10 * StatePlay.difficulty[:gen] && Enemies.enemies.size < 25 * StatePlay.difficulty[:max]
+    if rand(100) < 10 * StatePlay.difficulty.gen && Enemies.small_count < 25 * StatePlay.difficulty.max
       Enemies.create(@game,rand(8..600), -32, :small)
     end
   end
 
   def generate_turret
-    if rand(100) < 2 * StatePlay.difficulty[:gen]
+    if rand(100) < 2 * StatePlay.difficulty.gen
       [[32, Game::FIELD_W - 64], [64, Game::FIELD_W - 96]].sample.each do |x|
         Enemies.create(@game, x, -32, :turret)
       end

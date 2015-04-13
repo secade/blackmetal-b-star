@@ -14,6 +14,10 @@ module Enemies
     end
   end
 
+  def self.small_count
+    @@enemies.select {|e| e.class == Enemy }.size
+  end
+
   def self.update
     @@enemies.each { |e| e.update }
     self.clean
@@ -32,9 +36,7 @@ module Enemies
     @@enemies.clear
   end
 
-  def self.clean #destroy off-screen enemies
-    @@enemies.delete_if do |e|
-      e.x + e.width < 0 || e.x > Game::FIELD_W || e.y + e.height < 0 || e.y > Game::FIELD_W
-    end
+  def self.clean
+    @@enemies.delete_if(&:off_screen?)
   end
 end

@@ -15,7 +15,7 @@ class StateMachine
     @current_state.draw
   end
 
-  def new_state(state, options = {difficulty: Difficulty::Standard})
+  def new_state(state, options = {})
     case state
     when :title
       title_state(options)
