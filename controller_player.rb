@@ -24,10 +24,8 @@ class ControllerPlayer
       fire_orbs if @mode == :alive 
     when Gosu::KbZ
       fire_stars if @mode == :alive && @player.star_ready?
-    when Gosu::KbU
-      binding.pry
     when Gosu::KbEscape
-      end_game
+      end_game(true)
     end
   end
 
@@ -42,13 +40,13 @@ class ControllerPlayer
 
   def fire_stars
     @player.start_star_timer
-    [[6,0], [-6, 0], [0, 6], [0, -6], [6, 6], [6, -6], [-6, 6], [-6, -6]].each do |vels|
-      Bullets.create({game: @game, x: @player.x, y: @player.y, vels: {x: vels[0], y: vels[1]}, type: :p_star, first_gen: true })
+    [0, 45, 90, 135, 180, 225, 270, 315].each do |angle|
+      Bullets.create({game: @game, x: @player.x, y: @player.y, vels: Tracker.calc_vectors(6, angle), type: :p_star, first_gen: true })
     end
   end
 
-  def end_game
-    Score.create(difficulty: StatePlay.difficulty, score: Player.score)
+  def end_game(killed = false)
+    Score.create(difficulty: StatePlay.difficulty, score: Player.score) unless killed
     StatePlay.clean_game
     @game.state_machine.new_state(:title)
   end

@@ -5,6 +5,7 @@ class StatePlay < StateMachine
     Bullets.destroy_all
     Enemies.destroy_all
     Explosions.destroy_all
+    Player.destroy_all
     @@difficulty.clear
   end
 
@@ -67,6 +68,5 @@ class StatePlay < StateMachine
   def player_death
     @ui.mode = :dead
     @controller.mode = :dead
-    
   end
 end
