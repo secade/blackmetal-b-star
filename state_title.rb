@@ -1,18 +1,19 @@
 class StateTitle
   def initialize(game)
     @game = game
-    @controller = ControllerMenu.new(game)
     @background = Background.new(game, false)
-    # @menu = Menu.new(game)
+    @menu = Menu.new(game)
+    @controller = ControllerMenu.new(game, @menu)
   end
 
   def update
-
+    @controller.update
+    @menu.update
   end
 
   def draw
     @background.draw
-    # @menu.draw
+    @menu.draw
   end
 
   def button_down(id)

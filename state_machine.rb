@@ -22,17 +22,15 @@ class StateMachine
     end
   end
 
-  def swap_state
-    @previous_state, @current_state = @current_state, @previous_state
-  end
+  # def swap_state
+  #   @previous_state, @current_state = @current_state, @previous_state
+  # end
 
   def title_state(options)
-    @previous_state = @current_state
     @current_state = StateTitle.new(@game)
   end
 
   def play_state(options)
-    @previous_state = @current_state
     @current_state = StatePlay.new(@game, options[:difficulty])
   end
 

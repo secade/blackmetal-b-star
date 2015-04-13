@@ -11,10 +11,11 @@ class Images
   end
 
   class Fonts
-    attr_reader :text
+    attr_reader :text, :title
 
     def initialize(game)
       @text = Gosu::Font.new(game, "Courier", 24)
+      @title = Gosu::Font.new(game, "Arial Black", 36)
     end
   end
 

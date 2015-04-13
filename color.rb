@@ -7,6 +7,13 @@ module Color
     color
   end
 
+  def self.darken(color)
+    color.red = 256 - color.red
+    color.blue = 256 - color.blue
+    color.green = 256 - color.green
+    color
+  end
+
   White = 0xffffffff
 
   Black = 0xff000000
@@ -18,4 +25,8 @@ module Color
   Blue = 0xff0000ff
 
   Null = 0xffffffff
+
+  TitleBox = 0x99999999
+
+  TitleStart = Gosu::Color.new(0xffffffff)
 end

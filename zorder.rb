@@ -1,3 +1,3 @@
 module ZOrder
-  Background, Player, Enemies, Missiles, Explosions, Fonts = *0..5
+  Background, Player, Enemies, Missiles, Explosions, TitleBox, Fonts = *0..6
 end
