@@ -67,5 +67,6 @@ class StatePlay < StateMachine
   def player_death
     @ui.mode = :dead
     @controller.mode = :dead
+    
   end
 end

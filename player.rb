@@ -23,7 +23,7 @@ class Player
 
   attr_accessor :x, :y, :health, :max_health, :star_timer
 
-  MaxHealth = 50
+  MaxHealth = 5
   StarTimer = 200
 
   def initialize(game)

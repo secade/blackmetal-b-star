@@ -48,6 +48,7 @@ class ControllerPlayer
   end
 
   def end_game
+    Score.create(difficulty: StatePlay.difficulty, score: Player.score)
     StatePlay.clean_game
     @game.state_machine.new_state(:title)
   end
