@@ -1,31 +1,45 @@
 class Menu
   Multi = 2
   MenuGap = 50
-  attr_accessor :cursor
+  AnchorX = (Game::CANVAS_W - (Game::CANVAS_W / 2)) / 2
+  Speed = 15
+  attr_accessor :cursor, :moving, :display_mode
 
   def initialize(game)
     @game = game
     @cursor = 0
     @w, @h, @b = Game::CANVAS_W / 2, Game::CANVAS_H / 3 * 2, 25
-    @x, @y = (Game::CANVAS_W - @w) / 2, (Game::CANVAS_H - @h) / 2 
+    @x, @y = AnchorX, (Game::CANVAS_H - @h) / 2 
     @title = game.images.fonts.title
     @text = game.images.fonts.text
     @fh = @title.height
     @fx, @fy = (Game::CANVAS_W - 394) / 2, (Game::CANVAS_H - @h) / 8
     @color = Color::TitleStart
     @color_mode = :white # :white, :red, :blue, :green
-    @current_list = Difficulty.all.pluck(:name)
+    @display_mode = :game
+    @moving = false
+    p @lists = init_lists
+    @current_list = @lists.first
+  end
+
+  def init_lists
+    lists = []
+    Difficulty.all.each do |d|
+      lists << { name: d.name, items: d.scores.order(score: :desc).limit(5).pluck(:score) }
+    end
+    lists.unshift(name: 'Game Mode', items: Difficulty.all.pluck(:name))
   end
 
   def update
     tick
+    slide
   end
 
   def draw
     draw_title
     draw_boxes
     draw_options
-    draw_cursor
+    draw_cursor if @display_mode == :game
   end
 
   def tick
@@ -49,6 +63,48 @@ class Menu
     end
   end
 
+  def start_slide(dir)
+    dir == :left ? @display_mode = :slide_l_from_center : @display_mode = :slide_r_from_center 
+  end
+
+  def slide
+    case @display_mode
+    when :game
+    when :slide_l_from_center
+      @x -= Speed
+      if @x + @w <= 0
+        @x = Game::CANVAS_W
+        @display_mode = :slide_l_from_right
+      end
+    when :slide_l_from_right
+      @x -= Speed
+      if @x <= AnchorX
+        @x = AnchorX
+        @display_mode = :game
+      end
+    when :slide_r_from_center
+      @x += Speed
+      if @x >= Game::CANVAS_W
+        @x = -@w
+        @display_mode = :slide_r_from_right
+      end
+    when :slide_r_from_right
+      @x += Speed
+      if @x >= AnchorX
+        @x =  AnchorX
+        @display_mode = :game
+      end
+    end
+  end
+
+  def up
+    @cursor == 0 ? @cursor = @current_list[:items].size - 1 : @cursor -= 1
+  end
+
+  def down
+    @cursor == @current_list[:items].size - 1 ? @cursor = 0 : @cursor += 1
+  end
+
   def draw_boxes
     @game.draw_quad(@x, @y, Color::TitleBox, @x + @w, @y, Color::TitleBox, @x, @y + @h, Color::TitleBox, @x + @w, @y + @h, Color::TitleBox, ZOrder::TitleBox, :additive)
     @game.draw_quad(@x + @b, @y + @b, Color::TitleBox, @x - @b + @w, @y + @b, Color::TitleBox, @x + @b, @y + @h - @b, Color::TitleBox, @x + @w - @b, @y + @h - @b, Color::TitleBox, ZOrder::TitleBox, :additive)
@@ -59,24 +115,16 @@ class Menu
   end
 
   def draw_options
-    @current_list.each_with_index do |row, i|
-      @text.draw(row, @x + @b * 3, @y + @b * 1.5 + i * MenuGap, ZOrder::Fonts, 2.0, 2.0, Color::Black)
+    @current_list[:items].each_with_index do |row, i|
+      @text.draw("#{row}", @x + @b * 3, @y + @b * 1.5 + i * MenuGap, ZOrder::Fonts, 2.0, 2.0, Color::Black)
+    end
+
+    unless @current_list[:name] == 'Game Mode' || @moving
+      @text.draw("#{@current_list[:name]} High Scores!", @x, @y + @h  + @b * 1.5, ZOrder::Fonts, 2.0, 2.0, @color)
     end
   end
 
   def draw_cursor
     @game.draw_triangle(@x + @b * 1.75, @y + @b * 2.0 + @cursor * MenuGap, @color, @x + @b * 1.75, @y + @b * 2.5 + @cursor * MenuGap, @color, @x + @b * 2.25, @y + @b * 2.25 + @cursor * MenuGap, @color, 7)
-  end
-
-  def slide(dir)
-
-  end
-
-  def up
-    @cursor == 0 ? @cursor = @current_list.size - 1 : @cursor -= 1
-  end
-
-  def down
-    @cursor == @current_list.size - 1 ? @cursor = 0 : @cursor += 1
   end
 end
