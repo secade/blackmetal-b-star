@@ -44,6 +44,10 @@ class LightOrb < Bullet
     super
     @image = @game.images.bullets.light_orb
   end
+
+  def collide?(collidable)
+    (@x - collidable.x).abs <= @width && (@y - collidable.y).abs <= @height unless collidable.is_a? Bullet
+  end
 end
 
 class Star < Bullet

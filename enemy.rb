@@ -82,7 +82,7 @@ class Turret
     @game = game
     @hp = MaxHp
     calc_anim
-    @orb_timer = rand(40..100) / StatePlay.difficulty.fire_rate
+    @orb_timer = rand(80..140) / StatePlay.difficulty.fire_rate
     @ticker = @orb_timer
     @color = Color.create
     @width = @height = 32
