@@ -69,31 +69,41 @@ class Menu
 
   def slide
     case @display_mode
-    when :game
     when :slide_l_from_center
       @x -= Speed
       if @x + @w <= 0
         @x = Game::CANVAS_W
+        change_list(:left)
         @display_mode = :slide_l_from_right
       end
     when :slide_l_from_right
       @x -= Speed
       if @x <= AnchorX
         @x = AnchorX
-        @display_mode = :game
+        @current_list == @lists.first ? @display_mode = :game : @display_mode = :scores
       end
     when :slide_r_from_center
       @x += Speed
       if @x >= Game::CANVAS_W
         @x = -@w
+        change_list(:right)
         @display_mode = :slide_r_from_right
       end
     when :slide_r_from_right
       @x += Speed
       if @x >= AnchorX
         @x =  AnchorX
-        @display_mode = :game
+        @current_list == @lists.first ? @display_mode = :game : @display_mode = :scores
       end
+    end
+  end
+
+  def change_list(dir)
+    i = @lists.index(@current_list)
+    if dir == :right
+      @current_list == @lists.last ? @current_list = @lists.first : @current_list = @lists[i + 1]
+    else
+      @current_list == @lists.first ? @current_list = @lists.last : @current_list = @lists[i - 1]
     end
   end
 
