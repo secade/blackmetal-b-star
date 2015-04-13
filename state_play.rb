@@ -1,6 +1,13 @@
 class StatePlay < StateMachine
   @@difficulty = []
 
+  def self.clean_game
+    Bullets.destroy_all
+    Enemies.destroy_all
+    Explosions.destroy_all
+    @@difficulty.clear
+  end
+
   def self.difficulty
     @@difficulty.first
   end

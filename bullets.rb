@@ -15,6 +15,11 @@ module Bullets
     @@enemy_bullets.delete(bullet)
   end
 
+  def self.destroy_all
+    @@player_bullets.clear
+    @@enemy_bullets.clear
+  end
+
   def self.create(hash)
     case hash[:type]
     when :p_bullet

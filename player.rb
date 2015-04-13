@@ -8,6 +8,11 @@ class Player
     @@score
   end
 
+  def self.destroy_all
+    @@score = 0
+    @@players.clear
+  end
+
   def self.score_up(value)
     @@score += value
   end

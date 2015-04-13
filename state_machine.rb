@@ -1,4 +1,6 @@
 class StateMachine
+  attr_reader :current_state
+  
   def initialize(game)
     @game = game
     @current_state = StateTitle.new(game)
@@ -22,15 +24,13 @@ class StateMachine
     end
   end
 
-  # def swap_state
-  #   @previous_state, @current_state = @current_state, @previous_state
-  # end
-
   def title_state(options)
+    @current_state = nil
     @current_state = StateTitle.new(@game)
   end
 
   def play_state(options)
+    @current_state = nil
     @current_state = StatePlay.new(@game, options[:difficulty])
   end
 

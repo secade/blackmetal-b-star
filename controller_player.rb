@@ -48,6 +48,7 @@ class ControllerPlayer
   end
 
   def end_game
+    StatePlay.clean_game
     @game.state_machine.new_state(:title)
   end
 end

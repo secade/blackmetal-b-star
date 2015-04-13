@@ -9,6 +9,10 @@ module Explosions
     @@explosions.delete(explosion)
   end
 
+  def self.destroy_all
+    @@explosions.clear
+  end
+
   def self.create(game, x, y, x_dis, y_dis, type = :bullet)
     case type
     when :bullet
